@@ -73,6 +73,21 @@ services:
     networks:
       - general
 
+  gateway-service:
+    image: merttkayaa/gateway-service:latest
+    container_name: gateway-service
+    ports:
+      - "8765:8765"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    restart: always
+    depends_on:
+      - eureka-server
+      - user-service
+      - user-service-instance
+    networks:
+      - general
+
 networks:
   general:
      driver: bridge
