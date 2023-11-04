@@ -1,11 +1,14 @@
 package com.microdevs.userservice.entity;
 
+import com.microdevs.baseservice.entity.AuditModelBase;
 import com.microdevs.userservice.model.enums.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.*;
+
 
 @Setter
 @Getter
@@ -13,7 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "users", schema = "users")
-public class User {
+public class User extends AuditModelBase {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
