@@ -1,7 +1,7 @@
 package com.microdevs.userservice.entity;
 
 import com.microdevs.baseservice.entity.AuditModelBase;
-import com.microdevs.userservice.model.enums.UserStatus;
+import com.microdevs.baseservice.enums.StatusType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,13 +18,14 @@ import javax.persistence.*;
 @Table(name = "users", schema = "users")
 public class User extends AuditModelBase {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
+    @SequenceGenerator(sequenceName = "user_sequence", name = "user_sequence", allocationSize = 1)
     private Long id;
     private String first_name;
     private String last_name;
     private String phone;
     private String email;
     @Enumerated(EnumType.STRING)
-    private UserStatus status;
+    private StatusType status = StatusType.ACTIVE;
 
 }
