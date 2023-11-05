@@ -1,13 +1,11 @@
 package com.microdevs.userservice.mapper;
 
+import com.microdevs.baseservice.enums.StatusType;
 import com.microdevs.userservice.entity.User;
 import com.microdevs.userservice.model.CreateUser;
 import com.microdevs.userservice.model.UpdateUser;
 import com.microdevs.userservice.model.dto.UserDto;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
@@ -20,4 +18,9 @@ public interface UserMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     User updateToEntity(@MappingTarget User product, UpdateUser updateUser);
+
+    User dtoToEntity(UserDto userDto);
+
+    @Mapping(target = "status", source = "status")
+    User statusToEntity(@MappingTarget User user, StatusType status);
 }

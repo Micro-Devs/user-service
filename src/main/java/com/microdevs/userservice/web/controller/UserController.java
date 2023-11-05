@@ -12,10 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/api/user")
-
 public class UserController {
 
     private final UserService userService;
@@ -35,10 +35,21 @@ public class UserController {
         return userService.getUser(userFilter, pageable);
     }
 
-    @PutMapping
+    @PutMapping("/{phone}")
     public ResponseEntity<UserDto> updateUser(@PathVariable String phone, @RequestBody UpdateUser updateUser) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(phone, updateUser));
     }
-    
+
+    @PutMapping("terminate/{phone}")
+    public ResponseEntity<?> terminateUser(@PathVariable @NotNull String phone) {
+        userService.terminateUser(phone);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PutMapping("suspend/{phone}")
+    public ResponseEntity<?> suspendUser(@PathVariable @NotNull String phone) {
+        userService.passiveUser(phone);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 
 }

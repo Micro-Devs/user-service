@@ -14,4 +14,8 @@ public interface UserService {
     Page<UserDto> getUser(UserFilter userFilter, Pageable pageable);
 
     UserDto updateUser(String phone, UpdateUser updateUser);
+
+    void terminateUser(String phone);
+
+    void passiveUser(String phone);
 }
