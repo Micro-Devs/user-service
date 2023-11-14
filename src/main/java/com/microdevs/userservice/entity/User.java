@@ -1,6 +1,6 @@
 package com.microdevs.userservice.entity;
 
-import com.microdevs.baseservice.entity.AuditModelBase;
+import com.microdevs.baseservice.entity.BaseEntity;
 import com.microdevs.baseservice.enums.StatusType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "users", schema = "users")
-public class User extends AuditModelBase {
+public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
     @SequenceGenerator(sequenceName = "user_sequence", name = "user_sequence", allocationSize = 1)

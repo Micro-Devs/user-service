@@ -59,13 +59,13 @@ public class UserDbService {
         User updatedProduct = mapper.updateToEntity(optionalEntity.get(), updateUser);
         return mapper.entityToDto(repository.save(updatedProduct));
     }
-
+    @Transactional
     public void checkStatusAndTerminate(String phone) {
         Optional<User> optionalEntity = Optional.ofNullable(repository.findByPhoneAndStatusNot(phone, StatusType.TERMINATED).orElseThrow(() ->
                 new UserTerminatedException(UserConstant.ERROR_MESSAGE_USER_STATUS_TERMINATED, UserConstant.ERROR_CODE_USER_STATUS_TERMINATED, UserConstant.ERROR_DETAILED_MESSAGE_USER_STATUS_TERMINATED)));
         repository.save(mapper.statusToEntity(optionalEntity.get(), StatusType.TERMINATED));
     }
-
+    @Transactional
     public void checkStatusAndSuspend(String phone) {
         Optional<User> optionalEntity = Optional.ofNullable(repository.findByPhoneAndStatusNot(phone, StatusType.TERMINATED).orElseThrow(() ->
                 new UserTerminatedException(UserConstant.ERROR_MESSAGE_USER_STATUS_TERMINATED, UserConstant.ERROR_CODE_USER_STATUS_TERMINATED, UserConstant.ERROR_DETAILED_MESSAGE_USER_STATUS_TERMINATED)));
