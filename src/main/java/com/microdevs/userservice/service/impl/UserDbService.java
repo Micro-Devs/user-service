@@ -21,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -73,5 +74,9 @@ public class UserDbService {
             throw new UserSuspendedException(UserConstant.ERROR_MESSAGE_USER_STATUS_SUSPENDED, UserConstant.ERROR_CODE_USER_STATUS_SUSPENDED, UserConstant.ERROR_DETAILED_MESSAGE_USER_STATUS_SUSPENDED);
 
         repository.save(mapper.statusToEntity(optionalEntity.get(), StatusType.SUSPEND));
+    }
+
+    public List<UserDto> getAll() {
+        return mapper.entityListtoDtoList(repository.findAll());
     }
 }

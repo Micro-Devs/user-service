@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
     private final UserDbService userDbService;
@@ -41,5 +43,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void passiveUser(String phone) {
         userDbService.checkStatusAndSuspend(phone);
+    }
+
+    @Override
+    public List<UserDto> getAllUsers() {
+        return userDbService.getAll();
     }
 }

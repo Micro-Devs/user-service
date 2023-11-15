@@ -8,6 +8,8 @@ import com.microdevs.userservice.model.dto.UserDto;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
@@ -23,4 +25,6 @@ public interface UserMapper {
 
     @Mapping(target = "status", source = "status")
     User statusToEntity(@MappingTarget User user, StatusType status);
+
+    List<UserDto> entityListtoDtoList(List<User> userList);
 }

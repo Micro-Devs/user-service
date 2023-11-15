@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
@@ -50,6 +51,11 @@ public class UserController {
     public ResponseEntity<?> suspendUser(@PathVariable @NotNull String phone) {
         userService.passiveUser(phone);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/getAllUsers")
+    public List<UserDto> getAllUsers(){
+       return userService.getAllUsers();
     }
 
 }
