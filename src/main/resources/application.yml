@@ -5,13 +5,17 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/user_db
     username: postgres
-    password: postgres
+    password: ENC(wZKp2ZNhOxUDSUgrCmpRR+ddUUViGHGo)
   jpa:
     show-sql: true
     properties:
       hibernate:
         format_sql: true
 
+jasypt:
+  encryptor:
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+    algorithm: PBEWithMD5AndTripleDES
 
 application:
   title: User Service
